@@ -1,0 +1,19 @@
+﻿@model ImageHandler.Models.UploadResponse
+
+
+    <div class="jumbotron">
+        <h3>Image Upload</h3>
+        <form action="/Home/ImageUpload" method="post" enctype="multipart/form-data">
+            <input type="file" name="uploadfile" id="uploadfile" />
+            <br />
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </form>
+        @if (Model != null)
+        {
+            <h5>Image Name: <a href="~/ImageHandle/@Model.ImageId">@Model.ImageName</a></h5>
+            <h5>Image Type: @Model.ImageType</h5>
+            <h5>Image Guid: @Model.ImageId</h5>
+            <h5>Create Date: @Model.CreateDate</h5>
+            <img src="~/ImageHandle/@Model.ImageId" width="400" />
+        }
+    </div>
