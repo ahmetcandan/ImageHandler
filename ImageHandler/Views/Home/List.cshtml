@@ -1,0 +1,34 @@
+﻿@model List<ImageHandler.Models.UploadResponse>
+
+@{
+    ViewBag.Title = "ImageList";
+}
+
+<h2>List</h2>
+
+<p>
+    <a href="/Home/Index" class="btn btn-default">Upload Image</a>
+</p>
+<table class="table">
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <div class="col-md-6">
+                <p><b>Guid:</b> @Html.DisplayFor(modelItem => item.ImageId)</p>
+                <p><b>Image Name:</b> @Html.DisplayFor(modelItem => item.ImageName)</p>
+                <p><b>Type:</b> @Html.DisplayFor(modelItem => item.ImageType)</p>
+                <p><b>Create Date:</b> @Html.DisplayFor(modelItem => item.CreateDate)</p>
+                <p><a href="~/ImageHandle/@item.ImageId" target="_blank">Handle Image Url</a></p>
+            </div>
+            <div class="col-md-6">
+                <img src="~/ImageHandle/@item.ImageId" height="240" />
+            </div>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
+    </tr>
+}
+
+</table>

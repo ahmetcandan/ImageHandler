@@ -3,17 +3,22 @@
 
     <div class="jumbotron">
         <h3>Image Upload</h3>
-        <form action="/Home/ImageUpload" method="post" enctype="multipart/form-data">
+        <form action="/Home/Index" method="post" enctype="multipart/form-data">
             <input type="file" name="uploadfile" id="uploadfile" />
             <br />
-            <input type="submit" value="Submit" class="btn btn-default" />
+            <input type="submit" value="Submit" class="btn btn-info" />
         </form>
         @if (Model != null)
         {
-            <h5>Image Name: <a href="~/ImageHandle/@Model.ImageId">@Model.ImageName</a></h5>
+            <h5>Image Name: @Model.ImageName</h5>
             <h5>Image Type: @Model.ImageType</h5>
             <h5>Image Guid: @Model.ImageId</h5>
             <h5>Create Date: @Model.CreateDate</h5>
+            <h5><a href="~/ImageHandle/@Model.ImageId" target="_blank">Handle Image Url</a></h5>
             <img src="~/ImageHandle/@Model.ImageId" width="400" />
         }
+
+        <div style="margin-top: 50px">
+            <a href="/Home/List" class="btn btn-default">Image List</a>
+        </div>
     </div>

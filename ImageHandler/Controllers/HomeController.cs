@@ -15,7 +15,8 @@ namespace ImageHandler.Controllers
             return View();
         }
 
-        public ActionResult ImageUpload(HttpPostedFileBase uploadfile)
+        [HttpPost]
+        public ActionResult Index(HttpPostedFileBase uploadfile)
         {
             UploadResponse response = new UploadResponse();
             if (uploadfile != null && uploadfile.ContentLength > 0)
@@ -37,7 +38,25 @@ namespace ImageHandler.Controllers
                 response.ImageType = img.ImageType;
                 response.ImageName = img.ImageName;
             }
-            return View("Index", response);
+            return View(response);
+        }
+
+        public ActionResult List(int take = 10, int skip = 0)
+        {
+            var db = new ImageHandlerDBEntities();
+            var response = (from img in db.tbl_Image
+                            select new UploadResponse
+                            {
+                                ImageId = img.ImageId,
+                                ImageName = img.ImageName,
+                                ImageType = img.ImageType,
+                                CreateDate = img.CreateDate
+                            })
+                            .OrderBy(c => c.CreateDate)
+                            .Take(take)
+                            .Skip(skip)
+                            .ToList();
+            return View(response);
         }
     }
 }
