@@ -17,7 +17,8 @@ namespace ImageHandler
     {
         public void ProcessRequest(HttpContext context)
         {
-            Guid guid = Guid.Parse(context.Request.Path.Split('/')[2]);
+            var requestPaths = context.Request.Path.Split('/');
+            Guid guid = Guid.Parse(requestPaths[requestPaths.Length - 1]);
             int width = 0, height = 0;
 
             if (context.Request.QueryString.ContainsKey("width"))
